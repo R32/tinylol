@@ -1,0 +1,13 @@
+{
+  "name": "tinylol",
+  "classPath": "",
+  "version": "0.1.0",
+  "url": "https://github.com/R32/tinylol/",
+  "license": "MIT",
+  "tags": ["webgl", "html", "game"],
+  "description": "A lightweight JavaScript gaming micro-library, optimized for js13kGames",
+  "releasenote": "Work In Progress",
+  "dependencies": {
+  },
+  "contributors": ["r32"]
+}
