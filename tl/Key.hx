@@ -18,17 +18,21 @@ class Key {
 
 	public static inline function curFrame() return Timer.frames;
 
-	public static function init() {
-		var opt = {capture : true};
-		window.addEventListener("keydown", function( e : KeyboardEvent ) {
-			var code = e.keyCode;
-			pressed[code] = curFrame();
-			e.stopPropagation();
-		}, opt);
-		window.addEventListener("keyup", function( e : KeyboardEvent ) {
-			var code = e.keyCode;
-			pressed[code] = -curFrame();
-			e.stopPropagation();
-		}, opt);
+	dynamic public static function onkeydown( e : KeyboardEvent ) {
+		e.stopPropagation();
+		var code = e.keyCode;
+		if (pressed[code] > 0)
+			return;
+		pressed[code] = curFrame();
+	}
+
+	dynamic public static function onkeyup( e : KeyboardEvent ) {
+		e.stopPropagation();
+		pressed[e.keyCode] = -curFrame();
+	}
+
+	dynamic public static function init( ?capture : Bool ) {
+		window.addEventListener("keydown", onkeydown, capture);
+		window.addEventListener("keyup", onkeyup, capture);
 	}
 }

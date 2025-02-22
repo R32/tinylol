@@ -1,11 +1,9 @@
 package tl;
 
-/*
- * time measured in milliseconds
- */
 private typedef Waiter = {
-	var time : Float;
-	function run() : Void;
+	var delay : Int; // in frames
+	var ?extra : Dynamic;
+	var run : haxe.Constraints.Function;
 }
 
 class Wait {
@@ -21,25 +19,31 @@ class Wait {
 	}
 
 	public inline function clear() {
-		list = [];
+		list.resize(0);
 	}
 
-	public inline function add<T:Waiter>( w : T ) {
+	public inline function addw( w : Waiter ) {
 		list.push(w);
 	}
 
-	public inline function addeasy( time : Float, run : Void->Void ) {
-		list.push({ time : time, run : run });
+	public inline function addx( delay : Int, run : Void->Void ) {
+		list.push({ delay : delay, run : run });
 	}
 
-	public function update( dt : Float ) {
-		var i = list.length;
-		while (i > 0) {
-			var w = list[--i];
-			w.time -= dt;
-			if (w.time <= 0.) {
-				w.run();
+	public inline function add<T>( delay : Int, run : T->Void, extra : T ) {
+		list.push({ delay : delay, run : run, extra : extra });
+	}
+
+	public function update() {
+		var i = 0;
+		while (i < list.length) {
+			var w = list[i];
+			w.delay--;
+			if (w.delay <= 0) {
+				w.run(w.extra);
 				list.splice(i, 1);
+			} else {
+				i++;
 			}
 		}
 	}

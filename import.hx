@@ -11,14 +11,14 @@ import js.html.KeyboardEvent;
 import js.lib.Map;
 import js.lib.Set;
 import js.lib.Error;
-import js.lib.Function;
+import js.lib.Int32Array;
 // webgl
 
 // global variable
-import tl.Tinylol.console;
-import tl.Tinylol.document;
-import tl.Tinylol.window;
-import tl.Tinylol.performance;
+import tl.Globals.console;
+import tl.Globals.document;
+import tl.Globals.window;
+import tl.Globals.performance;
 
 // Config variable
 import tl.Cfg.WIDTH;

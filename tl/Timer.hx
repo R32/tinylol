@@ -15,7 +15,7 @@ class Timer {
 
 	static var then : Float;
 
-	static var id = -1;
+	static var id = 0;
 
 	static var running : (dt : Float)->Void;
 
